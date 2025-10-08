@@ -118,17 +118,20 @@
             <nav class="flex-1 overflow-y-auto py-4 px-3">
                 <ul class="space-y-1">
                     <li>
-                        <a href="#" class="nav-item active flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group">
+                        <a href="{{ route('dashboard') }}"
+                            class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group
+               {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 mr-3 group-hover:scale-110 transition-transform">
                                 <i class="ri-dashboard-fill text-xl"></i>
                             </span>
                             <span class="font-medium">Dashboard</span>
-                            <!-- dashboard ma kei new update aayesi change hune... -->
                             <span class="ml-auto bg-primary-500 text-white text-xs px-2 py-1 rounded-full">5</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group">
+                        <a href="{{ route('pickup_requests.index') }}"
+                            class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group
+               {{ request()->routeIs('pickup_requests.index') ? 'active' : '' }}">
                             <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 mr-3 group-hover:scale-110 transition-transform">
                                 <i class="ri-service-fill text-xl"></i>
                             </span>
@@ -136,7 +139,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group">
+                        <a href=""
+                            class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group
+               {{ request()->routeIs('blog.*') ? 'active' : '' }}">
                             <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mr-3 group-hover:scale-110 transition-transform">
                                 <i class="ri-article-fill text-xl"></i>
                             </span>
@@ -144,7 +149,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group">
+                        <a href=""
+                            class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group
+               {{ request()->routeIs('citizens.*') ? 'active' : '' }}">
                             <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 mr-3 group-hover:scale-110 transition-transform">
                                 <i class="ri-group-fill text-xl"></i>
                             </span>
@@ -152,7 +159,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group">
+                        <a href=""
+                            class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group
+               {{ request()->routeIs('collectors.*') ? 'active' : '' }}">
                             <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 mr-3 group-hover:scale-110 transition-transform">
                                 <i class="ri-truck-fill text-xl"></i>
                             </span>
@@ -162,7 +171,9 @@
 
                     <!-- Divider -->
                     <li class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-700">
-                        <a href="#" class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group">
+                        <a href=""
+                            class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group
+               {{ request()->routeIs('settings.*') ? 'active' : '' }}">
                             <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 mr-3 group-hover:scale-110 transition-transform">
                                 <i class="ri-settings-3-fill text-xl"></i>
                             </span>
@@ -171,6 +182,7 @@
                     </li>
                 </ul>
             </nav>
+
 
             <!-- User Profile & Logout -->
             <div class="p-4 border-t border-slate-200 dark:border-slate-700">
