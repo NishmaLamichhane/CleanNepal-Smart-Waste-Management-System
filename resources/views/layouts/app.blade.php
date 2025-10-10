@@ -129,9 +129,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('pickup_requests.index') }}"
+                        <a href="{{ route('support.index') }}"
                             class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group
-               {{ request()->routeIs('pickup_requests.index') ? 'active' : '' }}">
+               {{ request()->routeIs('support.index') ? 'active' : '' }}">
                             <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 mr-3 group-hover:scale-110 transition-transform">
                                 <i class="ri-service-fill text-xl"></i>
                             </span>
