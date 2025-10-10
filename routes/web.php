@@ -1,15 +1,15 @@
 <?php
 
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PickupRequestController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Route;
 
 // ----------------------------
 // Public (User / Guest) Routes
 // ----------------------------
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PagesController::class, 'welcome'])->name('home');
 
 // User services page (public)
 Route::get('/services', [PickupRequestController::class, 'services'])
@@ -40,6 +40,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/pickup-requests/{pickupRequest}/status', [PickupRequestController::class, 'updateStatus'])
         ->name('admin.pickup_requests.updateStatus');
 });
+Route::resource('support',SupportController::class);
+
 
 // ----------------------------
 // Dashboard & Profile
