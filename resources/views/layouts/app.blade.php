@@ -139,7 +139,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href=""
+                        <a href="{{route('blog.index')}}"
                             class="nav-item flex items-center p-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-primary-50 dark:hover:bg-slate-700 transition-all duration-300 group
                {{ request()->routeIs('blog.*') ? 'active' : '' }}">
                             <span class="flex items-center justify-center w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mr-3 group-hover:scale-110 transition-transform">

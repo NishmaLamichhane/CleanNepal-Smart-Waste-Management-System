@@ -56,7 +56,7 @@
                         </td>
                         <td class="px-4 py-2 text-center space-x-2">
                             <!-- Assign Collector Form -->
-                            <form action="{{ route('pickup_requests.assignCollector', $request) }}" method="POST" class="inline-block">
+                            <form action="" method="POST" class="inline-block">
                                 @csrf
                                 <select name="collector_id" class="border rounded px-2 py-1 text-sm">
                                     <option value="">-- Select --</option>
@@ -72,7 +72,7 @@
                             </form>
 
                             <!-- Update Status Form -->
-                            <form action="{{ route('pickup_requests.updateStatus', $request) }}" method="POST" class="inline-block">
+                            <form action="" method="POST" class="inline-block">
                                 @csrf
                                 <select name="status" class="border rounded px-2 py-1 text-sm">
                                     <option value="pending" {{ $request->status == 'pending' ? 'selected' : '' }}>Pending</option>

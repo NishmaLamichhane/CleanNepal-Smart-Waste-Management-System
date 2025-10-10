@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PickupRequestController;
 use App\Http\Controllers\ProfileController;
@@ -41,7 +42,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ->name('admin.pickup_requests.updateStatus');
 });
 Route::resource('support',SupportController::class);
-
+Route::resource('blog',BlogController::class);
 
 // ----------------------------
 // Dashboard & Profile

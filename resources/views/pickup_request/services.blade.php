@@ -1,4 +1,4 @@
-@extends('layouts.user_master')
+@extends('layouts.master')
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-emerald-50 to-cyan-100 py-12 px-4 sm:px-6">
     <div class="max-w-6xl mx-auto">
@@ -272,14 +272,14 @@
         </div>
 
         <!-- Testimonials Section -->
-        <div class="mb-16">
+        <!-- <div class="mb-16">
             <h2 class="text-3xl font-bold text-emerald-900 text-center mb-12">What Our Clients Say</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white p-6 rounded-2xl shadow-md">
                     <div class="flex items-center mb-4">
                         <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Client" class="w-12 h-12 rounded-full mr-4">
                         <div>
-                            <h4 class="font-bold text-emerald-900">Sita Sharma</h4>
+                            <h4 class="font-bold text-emerald-900">Nirika Lamichhane</h4>
                             <div class="flex text-yellow-400">
                                 <i class="ri-star-fill"></i>
                                 <i class="ri-star-fill"></i>
@@ -295,7 +295,7 @@
                     <div class="flex items-center mb-4">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Client" class="w-12 h-12 rounded-full mr-4">
                         <div>
-                            <h4 class="font-bold text-emerald-900">Rajesh Thapa</h4>
+                            <h4 class="font-bold text-emerald-900">Swostika Adhikari</h4>
                             <div class="flex text-yellow-400">
                                 <i class="ri-star-fill"></i>
                                 <i class="ri-star-fill"></i>
@@ -311,7 +311,7 @@
                     <div class="flex items-center mb-4">
                         <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Client" class="w-12 h-12 rounded-full mr-4">
                         <div>
-                            <h4 class="font-bold text-emerald-900">Maya Gurung</h4>
+                            <h4 class="font-bold text-emerald-900">Prabesh Acharya</h4>
                             <div class="flex text-yellow-400">
                                 <i class="ri-star-fill"></i>
                                 <i class="ri-star-fill"></i>
@@ -324,7 +324,7 @@
                     <p class="text-gray-600 italic">"The educational programs offered by CleanNepal have helped our school implement effective waste management practices. Our students are now more environmentally conscious!"</p>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Contact Section -->
         <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">

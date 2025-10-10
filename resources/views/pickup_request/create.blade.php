@@ -1,5 +1,5 @@
 
-@extends('layouts.user_master')
+@extends('layouts.master')
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-emerald-50 to-cyan-100 py-12 px-4 sm:px-6">
     <div class="max-w-2xl mx-auto">
