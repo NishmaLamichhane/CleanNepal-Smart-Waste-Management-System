@@ -12,9 +12,9 @@
             <p class="mt-2 text-gray-600 dark:text-gray-400">Manage all your service offerings in one place</p>
             <div class="mt-3 h-1 w-32 bg-green-600 rounded-full"></div>
         </div>
-        <a href="{{ route('support.create') }}" 
-           class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-6 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center">
-            <i class="ri-add-line mr-2 text-lg"></i> 
+        <a href="{{ route('support.create') }}"
+            class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-6 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center">
+            <i class="ri-add-line mr-2 text-lg"></i>
             <span class="font-medium">Add New Service</span>
         </a>
     </div>
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-blue-500">
             <div class="flex items-center">
                 <div class="p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30">
@@ -44,47 +44,48 @@
                 </div>
             </div>
         </div>
-    
-    </div>
-   <!-- Table Section -->
-<div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
-    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-        <h2 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
-            <i class="ri-database-2-line mr-2 text-emerald-500"></i>
-            All Services
-        </h2>
-    </div>
 
-    <div class="overflow-x-auto">
-        <table class="min-w-full text-sm">
-            <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 uppercase text-xs font-semibold tracking-wider">
-                <tr>
-                    <th class="px-6 py-3 text-left">S.N</th>
-                    <th class="px-6 py-3 text-left">Service</th>
-                    <th class="px-6 py-3 text-left">Description</th>
-                    <th class="px-6 py-3 text-right">Actions</th>
-                </tr>
-            </thead>
+    </div>
+    <!-- Table Section -->
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+        <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+            <h2 class="text-lg font-semibold text-gray-800 dark:text-white flex items-center">
+                <i class="ri-database-2-line mr-2 text-emerald-500"></i>
+                All Services
+            </h2>
+        </div>
 
-            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                @forelse($supports as $support)
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+                <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 uppercase text-xs font-semibold tracking-wider">
+                    <tr>
+                        <th class="px-6 py-3 text-center">S.N</th>
+                        <th class="px-6 py-3 text-center">Service</th>
+                        <th class="px-6 py-3 text-center">Description</th>
+                        <th class="px-6 py-3 text-center">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                    @forelse($supports as $support)
                     <tr class="transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 even:bg-gray-50 dark:even:bg-gray-900/40">
-                        <td class="px-6 py-4 text-gray-800 dark:text-gray-200">
-                            <div class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700">
-                                <span class="font-medium">{{ $loop->iteration }}</span>
+                        <td class="px-10 py-4 text-gray-800 dark:text-gray-200 text-center align-middle">
+                            <div class="flex items-center justify-center">
+                                <div class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700">
+                                    <span class="font-medium">{{ $loop->iteration }}</span>
+                                </div>
                             </div>
                         </td>
-
-                        <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                        <td class="px-6 py-4 text-center font-semibold text-gray-900 dark:text-white">
                             {{ $support->service }}
                         </td>
 
-                        <td class="px-6 py-4 text-gray-700 dark:text-gray-300">
+                        <td class="px-6 py-4 text-center text-gray-700 dark:text-gray-300">
                             <div class="description-container">
                                 <span class="description-preview">
                                     {{ Str::limit($support->description, 100) }}
                                     @if(strlen($support->description) > 100)
-                                        <a href="javascript:void(0);" class="text-emerald-500 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300 ml-1 read-more-toggle font-medium">Read More</a>
+                                    <a href="javascript:void(0);" class="text-emerald-500 hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-300 ml-1 read-more-toggle font-medium">Read More</a>
                                     @endif
                                 </span>
                                 <span class="description-full hidden">
@@ -93,46 +94,46 @@
                                 </span>
                             </div>
                         </td>
-           
-                        <td class="px-6 py-4 text-right font-medium">
-                            <div class="flex justify-end space-x-3">
-                                <a href="{{ route('support.edit', $support->id) }}" 
-                                   class="inline-flex items-center px-3 py-1.5 rounded-md text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-sm">
+
+                        <td class="px-6 py-4 text-center font-medium">
+                            <div class="flex justify-center space-x-3">
+                                <a href="{{ route('support.edit', $support->id) }}"
+                                    class="inline-flex items-center px-3 py-1.5 rounded-md text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-sm">
                                     <i class="ri-edit-line mr-1"></i> Edit
                                 </a>
                                 <button class="inline-flex items-center px-3 py-1.5 rounded-md text-white bg-red-600 hover:bg-red-700 transition-all duration-300 shadow-sm delete-btn"
-                                        data-id="{{ $support->id }}">
+                                    data-id="{{ $support->id }}">
                                     <i class="ri-delete-bin-line mr-1"></i> Delete
                                 </button>
                             </div>
                         </td>
                     </tr>
-                @empty
+                    @empty
                     <tr>
                         <td colspan="4" class="px-6 py-8 text-center text-gray-600 dark:text-gray-400">
                             No services available.
                         </td>
                     </tr>
-                @endforelse
-            </tbody>
-        </table>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
     <!-- Empty State -->
     @if($supports->count() === 0)
-        <div class="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12 text-center">
-            <div class="flex justify-center mb-6">
-                <div class="w-24 h-24 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center">
-                    <i class="ri-inbox-line text-4xl text-green-600 dark:text-green-400"></i>
-                </div>
+    <div class="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-12 text-center">
+        <div class="flex justify-center mb-6">
+            <div class="w-24 h-24 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center">
+                <i class="ri-inbox-line text-4xl text-green-600 dark:text-green-400"></i>
             </div>
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">No services found</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-md mx-auto">Get started by adding your first service to showcase your offerings.</p>
-            <a href="{{ route('support.create') }}" 
-               class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300">
-                <i class="ri-add-line mr-2"></i> Add Your First Service
-            </a>
         </div>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">No services found</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-md mx-auto">Get started by adding your first service to showcase your offerings.</p>
+        <a href="{{ route('support.create') }}"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300">
+            <i class="ri-add-line mr-2"></i> Add Your First Service
+        </a>
+    </div>
     @endif
 </div>
 
@@ -179,69 +180,69 @@
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Toggle description visibility
-    document.querySelectorAll('.read-more-toggle').forEach(toggle => {
-        toggle.addEventListener('click', function() {
-            const container = this.closest('.description-container');
-            const preview = container.querySelector('.description-preview');
-            const full = container.querySelector('.description-full');
-            
-            preview.classList.toggle('hidden');
-            full.classList.toggle('hidden');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle description visibility
+        document.querySelectorAll('.read-more-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const container = this.closest('.description-container');
+                const preview = container.querySelector('.description-preview');
+                const full = container.querySelector('.description-full');
+
+                preview.classList.toggle('hidden');
+                full.classList.toggle('hidden');
+            });
         });
-    });
 
-    // Delete functionality
-    const deleteModal = document.getElementById('deleteModal');
-    const modalContent = document.getElementById('modalContent');
-    const deleteForm = document.getElementById('deleteForm');
-    const cancelDelete = document.getElementById('cancelDelete');
-    let currentId = null;
+        // Delete functionality
+        const deleteModal = document.getElementById('deleteModal');
+        const modalContent = document.getElementById('modalContent');
+        const deleteForm = document.getElementById('deleteForm');
+        const cancelDelete = document.getElementById('cancelDelete');
+        let currentId = null;
 
-    document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            currentId = this.getAttribute('data-id');
-            deleteForm.action = `/support/${currentId}`;
-            
-            // Show modal with animation
-            deleteModal.classList.remove('hidden');
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                currentId = this.getAttribute('data-id');
+                deleteForm.action = `/support/${currentId}`;
+
+                // Show modal with animation
+                deleteModal.classList.remove('hidden');
+                setTimeout(() => {
+                    deleteModal.classList.remove('opacity-0');
+                    deleteModal.classList.add('opacity-100');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            });
+        });
+
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            deleteModal.classList.remove('opacity-100');
+            deleteModal.classList.add('opacity-0');
+
             setTimeout(() => {
-                deleteModal.classList.remove('opacity-0');
-                deleteModal.classList.add('opacity-100');
-                modalContent.classList.remove('scale-95', 'opacity-0');
-                modalContent.classList.add('scale-100', 'opacity-100');
-            }, 10);
+                deleteModal.classList.add('hidden');
+                currentId = null;
+            }, 300);
+        }
+
+        cancelDelete.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside
+        deleteModal.addEventListener('click', function(event) {
+            if (event.target === deleteModal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && !deleteModal.classList.contains('hidden')) {
+                closeModal();
+            }
         });
     });
-
-    function closeModal() {
-        modalContent.classList.remove('scale-100', 'opacity-100');
-        modalContent.classList.add('scale-95', 'opacity-0');
-        deleteModal.classList.remove('opacity-100');
-        deleteModal.classList.add('opacity-0');
-        
-        setTimeout(() => {
-            deleteModal.classList.add('hidden');
-            currentId = null;
-        }, 300);
-    }
-
-    cancelDelete.addEventListener('click', closeModal);
-
-    // Close modal when clicking outside
-    deleteModal.addEventListener('click', function(event) {
-        if (event.target === deleteModal) {
-            closeModal();
-        }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && !deleteModal.classList.contains('hidden')) {
-            closeModal();
-        }
-    });
-});
 </script>
 @endsection

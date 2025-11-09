@@ -27,6 +27,8 @@ return new class extends Migration
                 'completed',
                 'cancelled'
             ])->default('pending');
+
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('collector_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });

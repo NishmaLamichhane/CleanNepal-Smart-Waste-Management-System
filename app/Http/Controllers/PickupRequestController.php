@@ -2,78 +2,115 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PickupRequest;
 use Illuminate\Http\Request;
+use App\Models\PickupRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PickupRequestController extends Controller
 {
-
-    public function services()
+    /**
+     * Display all pickup requests for the logged-in user
+     */
+    public function index()
     {
-        return view('pickup_request.services');
+        // Show only the requests of the logged-in user
+        $pickupRequests = PickupRequest::where('user_id', Auth::id())
+            ->latest()
+            ->get();
+
+        return view('pickup_request.index', compact('pickupRequests'));
     }
 
+    /**
+     * Show the pickup request form
+     */
     public function create()
     {
         return view('pickup_request.create');
     }
 
+    /**
+     * Handle form submission to store a new pickup request
+     */
     public function store(Request $request)
     {
-        // Validate and store the pickup request
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'contact' => 'required|string|max:20',
-            'address' => 'required|string|max:500',
-            'waste_type' => 'required|string|max:100',
-            'quantity' => 'required|integer|min:1',
-            'pickup_time' => 'required|date',
-        ]);
-        // Store logic here...
-        PickupRequest::create([
-            'name' => $request->name,
-            'contact' => $request->contact,
-            'address' => $request->address,
-            'waste_type' => $request->waste_type,
-            'quantity' => $request->quantity,
-            'pickup_time' => $request->pickup_time,
-            'status' => 'pending',
+            'address' => 'required|string|max:255',
+            'waste_type' => 'required|string',
+            'quantity' => 'required|numeric|min:1',
+            'pickup_time' => 'required|date|after:now',
         ]);
 
-        return redirect()->route('pickup_requests.create')->with('success', 'Pickup request created successfully.');
-    }
-    public function index()
-    {
-        $requests = PickupRequest::latest()->get(); // fetch all pickup requests
-        return view('pickup_request.index', compact('requests'));
+        // Add user_id automatically (so each request is linked to the logged-in user)
+        $validated['user_id'] = Auth::id();
+        $validated['status'] = 'Pending'; // default status
+
+        PickupRequest::create($validated);
+
+        return redirect()
+            ->route('pickup_request.index')
+            ->with('success', '✅ Your waste pickup request has been submitted successfully!');
     }
 
-    //Admin : assign collector to request
-    public function assignCollector(Request $request, PickupRequest $pickupRequest)
+    /**
+     * Optional - Edit existing request (if status is still pending)
+     */
+    public function edit($id)
     {
-        $request->validate([
-            'collector_id' => 'required|exists:users,id',
-        ]);
+        $request = PickupRequest::findOrFail($id);
 
-        $pickupRequest->update([
-            'collector_id' => $request->collector_id,
-            'status'       => 'assigned',
-        ]);
+        // Prevent others from editing
+        if ($request->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access');
+        }
 
-        return back()->with('success', 'Collector assigned successfully.');
+        return view('pickup_request.edit', compact('request'));
     }
 
-    // Admin/Collector can update status
-    public function updateStatus(Request $request, PickupRequest $pickupRequest)
+    /**
+     * Optional - Update a pending request
+     */
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'status' => 'required|string|in:pending,approved,assigned,in_progress,completed,cancelled',
+        $pickup = PickupRequest::findOrFail($id);
+
+        if ($pickup->user_id !== Auth::id() || $pickup->status !== 'Pending') {
+            abort(403, 'You cannot modify this request.');
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'contact' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'waste_type' => 'required|string',
+            'quantity' => 'required|numeric|min:1',
+            'pickup_time' => 'required|date|after:now',
         ]);
 
-        $pickupRequest->update([
-            'status' => $request->status,
-        ]);
+        $pickup->update($validated);
 
-        return back()->with('success', 'Pickup request status updated.');
+        return redirect()
+            ->route('pickup_request.index')
+            ->with('success', '♻️ Pickup request updated successfully!');
+    }
+
+    /**
+     * Cancel a request
+     */
+    public function destroy($id)
+    {
+        $pickup = PickupRequest::findOrFail($id);
+
+        if ($pickup->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $pickup->delete();
+
+        return redirect()
+            ->route('pickup_request.index')
+            ->with('success', '❌ Pickup request cancelled successfully.');
     }
 }

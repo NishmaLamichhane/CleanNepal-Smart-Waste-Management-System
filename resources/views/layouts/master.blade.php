@@ -81,9 +81,9 @@
             <div class="hidden md:flex items-center space-x-8">
                 <a href="{{route('home')}}" class="text-white hover:text-green-300 transition">Home</a>
                 <a href="#" class="text-white hover:text-green-300 transition">About</a>
-                <a href="{{route('pickup_request.services')}}" class="text-white hover:text-green-300 transition">Services</a>
+                <a href="{{route('viewsupport')}}" class="text-white hover:text-green-300 transition">Services</a>
                 <a href="#" class="text-white hover:text-green-300 transition">Pages</a>
-                <a href="#" class="text-white hover:text-green-300 transition">Blog</a>
+                <a href="{{route('viewblog')}}" class="text-white hover:text-green-300 transition">Blog</a>
                 <a href="#" class="text-white hover:text-green-300 transition">Contact</a>
                 <a href="{{route('login')}}" class="eco-btn" ><i class="ri-login-box-line text-white"></i>
                     Get Started

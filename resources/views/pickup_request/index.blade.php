@@ -1,100 +1,122 @@
-
-<!-- resources/views/pickup_requests/index.blade.php -->
-
-@extends('layouts.app')
-
+@extends('layouts.master')
 @section('content')
-<div class="max-w-7xl mx-auto py-8">
-    <h1 class="text-2xl font-bold text-gray-800 mb-6">Pickup Requests</h1>
 
-    <!-- Success Message -->
-    @if(session('success'))
-        <div class="mb-4 p-3 bg-green-100 text-green-700 rounded-lg">
-            {{ session('success') }}
+<div class="min-h-screen bg-gradient-to-br from-emerald-50 to-cyan-100 py-12 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-t-2xl p-8 shadow-xl mb-0">
+            <div class="flex items-center justify-between flex-wrap">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-white/20 p-3 rounded-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold text-white">Pickup Requests</h1>
+                        <p class="text-emerald-100 mt-1">Manage all your waste collection requests in one place</p>
+                    </div>
+                </div>
+                <a href="{{ route('pickup_request.create') }}" 
+                   class="mt-4 sm:mt-0 inline-flex items-center bg-white text-emerald-600 font-semibold px-5 py-2 rounded-lg shadow hover:bg-emerald-50 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    New Request
+                </a>
+            </div>
         </div>
-    @endif
 
-    <!-- Requests Table -->
-    <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <table class="min-w-full border-collapse">
-            <thead class="bg-gray-100 text-gray-700">
-                <tr>
-                    <th class="px-4 py-2 text-left">Id</th>
-                    <th class="px-4 py-2 text-left">Name</th>
-                    <th class="px-4 py-2 text-left">Contact</th>
-                    <th class="px-4 py-2 text-left">Address</th>
-                    <th class="px-4 py-2 text-left">Waste Type</th>
-                    <th class="px-4 py-2 text-left">Quantity</th>
-                    <th class="px-4 py-2 text-left">Pickup Time</th>
-                    <th class="px-4 py-2 text-left">Status</th>
-                    <th class="px-4 py-2 text-left">Collector</th>
-                    <th class="px-4 py-2 text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($requests as $request)
-                    <tr class="border-b">
-                        <td class="px-4 py-2">{{ $request->id }}</td>
-                        <td class="px-4 py-2">{{ $request->name }}</td>
-                        <td class="px-4 py-2">{{ $request->contact }}</td>
-                        <td class="px-4 py-2">{{ $request->address }}</td>
-                        <td class="px-4 py-2">{{ $request->waste_type }}</td>
-                        <td class="px-4 py-2">{{ $request->quantity }}</td>
-                        <td class="px-4 py-2">{{ $request->pickup_time }}</td>
-                        <td class="px-4 py-2">
-                            <span class="px-2 py-1 rounded text-xs
-                                @if($request->status === 'pending') bg-yellow-100 text-yellow-700
-                                @elseif($request->status === 'completed') bg-green-100 text-green-700
-                                @elseif($request->status === 'cancelled') bg-red-100 text-red-700
-                                @else bg-blue-100 text-blue-700
-                                @endif">
-                                {{ ucfirst($request->status) }}
-                            </span>
-                        </td>
-                        <td class="px-4 py-2">
-                            {{ $request->collector ? $request->collector->name : 'Not Assigned' }}
-                        </td>
-                        <td class="px-4 py-2 text-center space-x-2">
-                            <!-- Assign Collector Form -->
-                            <form action="" method="POST" class="inline-block">
-                                @csrf
-                                <select name="collector_id" class="border rounded px-2 py-1 text-sm">
-                                    <option value="">-- Select --</option>
-                                    @foreach(\App\Models\User::where('role', 'collector')->get() as $collector)
-                                        <option value="{{ $collector->id }}" {{ $request->collector_id == $collector->id ? 'selected' : '' }}>
-                                            {{ $collector->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded text-sm">
-                                    Assign
-                                </button>
-                            </form>
+        <!-- Table Section -->
+        <div class="bg-white rounded-b-2xl shadow-xl overflow-x-auto -mt-1">
+            @if(session('success'))
+                <div class="bg-green-100 text-green-800 p-4 rounded-t-lg border-b border-green-200">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-                            <!-- Update Status Form -->
-                            <form action="" method="POST" class="inline-block">
-                                @csrf
-                                <select name="status" class="border rounded px-2 py-1 text-sm">
-                                    <option value="pending" {{ $request->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="approved" {{ $request->status == 'approved' ? 'selected' : '' }}>Approved</option>
-                                    <option value="assigned" {{ $request->status == 'assigned' ? 'selected' : '' }}>Assigned</option>
-                                    <option value="in_progress" {{ $request->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                                    <option value="completed" {{ $request->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                                    <option value="cancelled" {{ $request->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                </select>
-                                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">
-                                    Update
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
+            <table class="min-w-full table-auto border-collapse">
+                <thead class="bg-emerald-100 text-emerald-800 uppercase text-sm font-semibold">
                     <tr>
-                        <td colspan="10" class="px-4 py-4 text-center text-gray-500">No pickup requests found.</td>
+                        <th class="py-3 px-4 text-left border-b">Name</th>
+                        <th class="py-3 px-4 text-left border-b">Contact</th>
+                        <th class="py-3 px-4 text-left border-b">Address</th>
+                        <th class="py-3 px-4 text-left border-b">Waste Type</th>
+                        <th class="py-3 px-4 text-left border-b">Quantity (kg)</th>
+                        <th class="py-3 px-4 text-left border-b">Pickup Time</th>
+                        <th class="py-3 px-4 text-left border-b">Status</th>
+                        <th class="py-3 px-4 text-center border-b">Actions</th>
                     </tr>
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse($pickupRequests as $request)
+                        <tr class="hover:bg-emerald-50 transition duration-200">
+                            <td class="py-3 px-4 border-b">{{ $request->name }}</td>
+                            <td class="py-3 px-4 border-b">{{ $request->contact }}</td>
+                            <td class="py-3 px-4 border-b">{{ $request->address }}</td>
+                            <td class="py-3 px-4 border-b">{{ $request->waste_type }}</td>
+                            <td class="py-3 px-4 border-b">{{ $request->quantity }}</td>
+                            <td class="py-3 px-4 border-b">{{ \Carbon\Carbon::parse($request->pickup_time)->format('d M Y, h:i A') }}</td>
+                            <td class="py-3 px-4 border-b">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold 
+                                    @if($request->status == 'Pending') bg-yellow-100 text-yellow-700 
+                                    @elseif($request->status == 'Completed') bg-green-100 text-green-700 
+                                    @else bg-red-100 text-red-700 @endif">
+                                    {{ $request->status }}
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 border-b text-center space-x-2">
+                                @if($request->status == 'Pending')
+                                    <a href="{{ route('pickup_request.edit', $request->id) }}" 
+                                       class="text-emerald-600 hover:text-emerald-800 font-medium">Edit</a>
+                                    <button onclick="showCancelPopup('{{ $request->id }}')" 
+                                            class="text-red-600 hover:text-red-800 font-medium">Cancel</button>
+                                @else
+                                    <span class="text-gray-500 text-sm">No actions</span>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="8" class="text-center py-6 text-gray-500">No pickup requests found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+<!-- Cancel Confirmation Modal -->
+<div id="cancelPopup" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <form id="cancelForm" method="POST" class="bg-white p-8 rounded-xl shadow-lg text-center">
+        @csrf
+        @method('DELETE')
+        <h3 class="text-lg font-semibold text-gray-800 mb-6">Cancel this pickup request?</h3>
+        <div class="flex justify-center gap-4">
+            <button type="submit" 
+                    class="bg-red-600 hover:bg-red-700 text-white font-medium px-5 py-2 rounded-lg transition">
+                Yes, Cancel
+            </button>
+            <button type="button" onclick="hideCancelPopup()" 
+                    class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium px-5 py-2 rounded-lg transition">
+                No, Go Back
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function showCancelPopup(id) {
+        document.getElementById('cancelPopup').classList.remove('hidden');
+        document.getElementById('cancelPopup').classList.add('flex');
+        document.getElementById('cancelForm').action = "/pickup-request/" + id;
+    }
+
+    function hideCancelPopup() {
+        document.getElementById('cancelPopup').classList.add('hidden');
+        document.getElementById('cancelPopup').classList.remove('flex');
+    }
+</script>
 @endsection

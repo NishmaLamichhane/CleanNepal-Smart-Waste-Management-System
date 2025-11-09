@@ -11,35 +11,20 @@ use Illuminate\Support\Facades\Route;
 // Public (User / Guest) Routes
 // ----------------------------
 Route::get('/', [PagesController::class, 'welcome'])->name('home');
-
+// Route::get('/viewsupport/{id}', [PagesController::class, 'viewsupport'])->name('viewsupport');
 // User services page (public)
-Route::get('/services', [PickupRequestController::class, 'services'])
-    ->name('pickup_request.services');
+Route::get('/viewblog', [PagesController::class, 'viewblog'])->name('viewblog');
+Route::get('/viewsupport', [PagesController::class, 'viewsupport'])->name('viewsupport');
+Route::get('/viewsupportdetails/{id}', [PagesController::class, 'viewsupportdetails'])->name('viewsupportdetails');
 
-// Pickup request form (for citizens / guests)
-Route::get('/pickup-requests/create', [PickupRequestController::class, 'create'])
-    ->name('pickup_requests.create');
-
-// Store pickup request
-Route::post('/pickup-requests', [PickupRequestController::class, 'store'])
-    ->name('pickup_requests.store');
-
+Route::middleware(['auth'])->group(function () {
+    Route::resource('pickup_request',PickupRequestController::class);
+});
 // ----------------------------
 // Admin / Collector Routes
 // ----------------------------
 Route::prefix('admin')->middleware(['auth'])->group(function () {
 
-    // Admin view all pickup requests
-    Route::get('/pickup-requests', [PickupRequestController::class, 'index'])
-        ->name('pickup_requests.index');
-
-    // Assign collector to request
-    Route::post('/pickup-requests/{pickupRequest}/assign', [PickupRequestController::class, 'assignCollector'])
-        ->name('admin.pickup_requests.assign');
-
-    // Update request status
-    Route::post('/pickup-requests/{pickupRequest}/status', [PickupRequestController::class, 'updateStatus'])
-        ->name('admin.pickup_requests.updateStatus');
 });
 Route::resource('support',SupportController::class);
 Route::resource('blog',BlogController::class);
